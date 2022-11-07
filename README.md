@@ -8,7 +8,7 @@
 
 ## Base Station Specifications 
 
-### Image Anaylsis through Machine Learning 
+### Image Analysis through Machine Learning  
 
 #### Neural Network
 
