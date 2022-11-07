@@ -2,6 +2,7 @@
 
 from system_config import BaseStationConfigurations
 from logging import log_input_data
+from comms import get_input
 
 # Since we only want to get a PoC out of this, we should focus mainly on the fundamental functions, 
 # hence I think we should completely single-threaded-monolithic implementation
@@ -9,13 +10,18 @@ from logging import log_input_data
 if __name__ == "__main__":
     
     # initialize the system configurations and store it
-    config = BaseStationConfigurations()  
+    #config = BaseStationConfigurations()  
     
+    images = get_input()
     
-    #while True:
+    for image_path in images:
+        
+        print(image_path)
         
         # This waiting could be a huge bottleneck, we should consider creating 1 working thread but for now wait 
         # wait on next image
+        
+        
         
         # log the image into the database 
         
@@ -25,5 +31,4 @@ if __name__ == "__main__":
         # if it is true then send a signal to the user
         
         
-    NotImplemented
     
