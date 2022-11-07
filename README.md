@@ -10,7 +10,7 @@
 
 ### Image Anaylsis through Machine Learning 
 
-#### Nerual Network
+#### Neural Network
 
 
 
