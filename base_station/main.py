@@ -4,9 +4,12 @@ from system_config import BaseStationConfigurations
 from logging import log_input_data
 from comms import get_input
 import base64
+import requests
 
 # Since we only want to get a PoC out of this, we should focus mainly on the fundamental functions, 
 # hence I think we should completely single-threaded-monolithic implementation
+
+ML_URL = ''
 
 if __name__ == "__main__":
     
@@ -24,5 +27,8 @@ if __name__ == "__main__":
         
         # 2. Encode image into byte string (converted using blob)
         # 3. Request ML API for prediction
+        r = requests.post(ML_URL, data={'image': encoded_string})
+        # return fields are TBD
+
         # 4. Wait for prediction
         # 5. Send alert if fire, and log the (image, time, gps, prediction)
