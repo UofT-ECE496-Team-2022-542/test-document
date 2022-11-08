@@ -10,25 +10,15 @@ from comms import get_input
 if __name__ == "__main__":
     
     # initialize the system configurations and store it
-    #config = BaseStationConfigurations()  
+    # config = BaseStationConfigurations()  
     
+    # gets list of image paths
     images = get_input()
     
     for image_path in images:
         
-        print(image_path)
-        
-        # This waiting could be a huge bottleneck, we should consider creating 1 working thread but for now wait 
-        # wait on next image
-        
-        
-        
-        # log the image into the database 
-        
-        # send image to ML API for analysis
-        # wait for the ML API to finish
-        
-        # if it is true then send a signal to the user
-        
-        
-    
+        print(image_path)    
+        # 2. Encode image into byte string (converted using blob)
+        # 3. Request ML API for prediction
+        # 4. Wait for prediction
+        # 5. Send alert if fire, and log the (image, time, gps, prediction)
