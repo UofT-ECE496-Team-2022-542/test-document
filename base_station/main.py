@@ -3,6 +3,7 @@
 from system_config import BaseStationConfigurations
 from logging import log_input_data
 from comms import get_input
+import base64
 
 # Since we only want to get a PoC out of this, we should focus mainly on the fundamental functions, 
 # hence I think we should completely single-threaded-monolithic implementation
@@ -17,7 +18,10 @@ if __name__ == "__main__":
     
     for image_path in images:
         
-        print(image_path)    
+        with open(image_path, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        # print(encoded_string)
+        
         # 2. Encode image into byte string (converted using blob)
         # 3. Request ML API for prediction
         # 4. Wait for prediction
