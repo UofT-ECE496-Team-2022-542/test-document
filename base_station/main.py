@@ -34,10 +34,11 @@ if __name__ == "__main__":
             encoded_string = base64.b64encode(image_file.read())
             # print(encoded_string)
         
-            # 2. Encode image into byte string (converted using blob)
-            # 3. Request ML API for prediction
-            # r = requests.post(ML_URL, data={'image': encoded_string})
-            # return fields are TBD
+        # 2. Encode image into byte string (converted using blob)
+        # 3. Request ML API for prediction
+        r = requests.post(ML_URL, data={'image': encoded_string})
+        print("test", r)
+        # return fields are TBD
 
         img = Image(image_path)
         if img.has_exif:
