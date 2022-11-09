@@ -5,13 +5,14 @@ from comms import get_input
 import base64
 from exif import Image
 import requests
+import json
 
 # Since we only want to get a PoC out of this, we should focus mainly on the fundamental functions, 
 # hence I think we should completely single-threaded-monolithic implementation
 
-ML_URL = ''
+ML_URL = 'http://127.0.0.1:8000/predict/'
 
-from exif import Image
+#from exif import Image
 
 def decimal_coords(coords, ref):
     decimal_degrees = coords[0] + coords[1] / 60 + coords[2] / 3600
@@ -36,25 +37,26 @@ if __name__ == "__main__":
         
         # 2. Encode image into byte string (converted using blob)
         # 3. Request ML API for prediction
-        r = requests.post(ML_URL, data={'image': encoded_string})
-        print("test", r)
+        r = requests.post(ML_URL, data={"image": encoded_string.encode('utf-8')}, headers = {"content-type": "application/json"})
+        print("test", r.text)
         # return fields are TBD
 
-        img = Image(image_path)
-        if img.has_exif:
-            try:
-                img.gps_longitude
-                coords = (decimal_coords(img.gps_latitude,
-                        img.gps_latitude_ref),
-                        decimal_coords(img.gps_longitude,
-                        img.gps_longitude_ref))
-                print({"imageTakenTime":img.datetime_original})
-                print(coords)
-            except AttributeError:
-                print ('No Coordinates')
-        else:
-            print('The Image has no EXIF information')
+        # img = Image(image_path)
+        # if img.has_exif:
+        #     try:
+        #         img.gps_longitude
+        #         coords = (decimal_coords(img.gps_latitude,
+        #                 img.gps_latitude_ref),
+        #                 decimal_coords(img.gps_longitude,
+        #                 img.gps_longitude_ref))
+        #         print({"imageTakenTime":img.datetime_original})
+        #         print(coords)
+        #     except AttributeError:
+        #         print ('No Coordinates')
+        # else:
+        #     print('The Image has no EXIF information')
             
+        break
         # 4. Wait for prediction
         # 5. Send alert if fire, and log the (image, time, gps, prediction)
 

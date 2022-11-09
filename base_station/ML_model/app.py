@@ -18,10 +18,14 @@ def index_view():
 
 @app.route('/predict/',methods=['POST'])
 def predict():
-    data = request.json
-    image = data['image']
-    response = forward_pass(model=model, image=Image.open(BytesIO(base64.b64decode(image))))
-    return response
+    try:
+        data = request.json
+        image = data['image']
+        response = forward_pass(model=model, image=Image.open(BytesIO(base64.b64decode(image))))
+        print("RESPONSE: ", response)
+        return response
+    except Exception as e:
+        print("ERROR: ", e)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
