@@ -8,10 +8,8 @@ class BaseStationConfigurations:
         #initialize connection with database
         self.database_conn = self.initialize_database()
         
-    
     def initialize_drone_connection():
         NotImplemented
         
-    def initialize_database():
-        NotImplemented
+    
     

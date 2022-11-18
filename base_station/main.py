@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # config = BaseStationConfigurations()  
     
     # gets list of image paths
-    images = get_input()
+    images = get_input() 
     
     for image_path in images:
         print(image_path)
