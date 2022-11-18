@@ -32,13 +32,13 @@ if __name__ == "__main__":
         print(image_path)
 
         with open(image_path, "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
+            encoded_img = base64.b64encode(image_file.read()).decode('utf-8')
             # print(encoded_string)
         
         # 2. Encode image into byte string (converted using blob)
         # 3. Request ML API for prediction
-        r = requests.post(ML_URL, data={"image": encoded_string.encode('utf-8')}, headers = {"content-type": "application/json"})
-        print("test", r.text)
+        r = requests.post(ML_URL, data=json.dumps({"image": encoded_img}), headers = {"content-type": "application/json"})
+        print("Client return: ", r.text)
         # return fields are TBD
 
         # img = Image(image_path)

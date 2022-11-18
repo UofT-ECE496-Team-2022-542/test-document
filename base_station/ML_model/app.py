@@ -20,8 +20,10 @@ def index_view():
 def predict():
     try:
         data = request.json
-        image = data['image']
-        response = forward_pass(model=model, image=Image.open(BytesIO(base64.b64decode(image))))
+        img_b64 = data['image']
+        img_bytes = base64.b64decode(img_b64.encode('utf-8'))
+        img = Image.open(BytesIO(img_bytes))
+        response = forward_pass(model=model, image=img)
         print("RESPONSE: ", response)
         return response
     except Exception as e:
