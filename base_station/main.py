@@ -3,12 +3,11 @@
 from system_config import BaseStationConfigurations
 from comms import get_input
 import base64
-from exif import Image
+#from exif import Image
 import requests
 import json
-
-# Since we only want to get a PoC out of this, we should focus mainly on the fundamental functions, 
-# hence I think we should completely single-threaded-monolithic implementation
+import logger
+import datetime
 
 ML_URL = 'http://127.0.0.1:8000/predict/'
 
@@ -23,7 +22,7 @@ def decimal_coords(coords, ref):
 if __name__ == "__main__":
     
     # initialize the system configurations and store it
-    # config = BaseStationConfigurations()  
+    config = BaseStationConfigurations()  
     
     # gets list of image paths
     images = get_input() 
@@ -32,7 +31,8 @@ if __name__ == "__main__":
         print(image_path)
 
         with open(image_path, "rb") as image_file:
-            encoded_img = base64.b64encode(image_file.read()).decode('utf-8')
+            img_blob = base64.b64encode(image_file.read())
+            encoded_img = img_blob.decode('utf-8')
             # print(encoded_string)
         
         # 2. Encode image into byte string (converted using blob)
@@ -56,7 +56,12 @@ if __name__ == "__main__":
         # else:
         #     print('The Image has no EXIF information')
             
-        break
         # 4. Wait for prediction
         # 5. Send alert if fire, and log the (image, time, gps, prediction)
+        currentDateTime = datetime.datetime.now()
+        logger.add_prediction(config.log_id, currentDateTime, 12.5, -15.541, img_blob, 95, config.db_name)
+        config.log_id += 1
+        
+    logger.print_db_log(config.db_name)
+    logger.close_databases(config.db_name)
 

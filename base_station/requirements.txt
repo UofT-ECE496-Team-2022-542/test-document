@@ -4,3 +4,4 @@ exif
 requests
 numpy
 torchvision
+sqlite3
