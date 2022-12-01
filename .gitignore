@@ -1,1 +1,8 @@
-venv
+# Ignore all virtual environments
+venv/
+
+#Ignore database
+BASE_STATION/databases/predictions.db
+
+#Ignore log
+BASE_STATION/logs/prediction_log.csv

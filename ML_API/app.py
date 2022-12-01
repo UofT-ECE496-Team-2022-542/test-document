@@ -8,6 +8,7 @@ import base64
 global model
 model = ImageClassifier()                         
 model.load_state_dict(torch.load('ResNet_Models/epoch_'+str(4)+'.pth', map_location=torch.device('cpu')))
+model.eval()
 
 app = Flask(__name__)
 

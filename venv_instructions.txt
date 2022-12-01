@@ -1,0 +1,20 @@
+0) py -m pip install --user virtualenv.
+(do this only once on your machine)
+
+1) Open a terminal and change diectories the service you want to run.
+Examples:
+> cd BASE_STATION
+> cd ML_API
+
+2) > py -m venv --without-pip ./venv
+
+3) > venv\Scripts\activate
+
+4) > py -m ensurepip 
+
+5) > py -m pip install -r requirements.txt
+
+6) Do whatever you want to do now.
+
+7) When you're done, deactivate the virtual environment.
+> deactivate

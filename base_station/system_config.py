@@ -1,9 +1,8 @@
 from logger import initialize_database
 
 class BaseStationConfigurations:
-    db_name = "base_station/station_databases/prediction.db"
+    db_name = "databases/predictions.db"
     log_id = 0
-    
     
     def __init__(self) -> None:
         
@@ -14,7 +13,4 @@ class BaseStationConfigurations:
         initialize_database(self.db_name)
         
     def initialize_drone_connection():
-        NotImplemented
-        
-    
-    
+        return None #Not Implmented

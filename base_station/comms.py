@@ -1,6 +1,6 @@
 import os
 
-directory = 'base_station/input'
+directory = 'test_inputs/batch_1'
 
 def get_input():
     

@@ -28,19 +28,17 @@ class ImageClassifier(ResNet):
             nn.LogSoftmax(dim=1)
         )
         
-def forward_pass(model, image):
+def forward_pass(model, image, detailed_response=False):
     test_transforms = transforms.Compose([transforms.Resize(256), transforms.ToTensor(),])
     image_tensor = test_transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
     input = Variable(image_tensor)
     #input = input.to(device)
     output = model(input)
-    index = output.data.cpu().numpy().argmax()
-    #return index
-    # if index: return "NO_FIRE"
-    # else: return "FIRE"
-
-    # return output.data[0]
-    # if output.data[0][0] <= output.data[0][1]: return "FIRE"
-    # else: return "NO_FIRE"
-    return str(1 + output.data[0][0]) + " FIRE, " + str(1 + output.data[0][1]) + " NO_FIRE"
+    
+    if detailed_response:
+        return str(1 + output.data[0][0]) + " FIRE, " + str(1 + output.data[0][1]) + " NO_FIRE"
+    else:
+        index = output.data.cpu().numpy().argmax()
+        if index==0: return "FIRE"
+        else: return "NO_FIRE"
