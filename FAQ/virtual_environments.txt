@@ -3,7 +3,7 @@
 
 1) Open a terminal and change diectories the service you want to run.
 Examples:
-> cd BASE_STATION
+> cd BACKEND
 > cd ML_API
 
 2) > py -m venv --without-pip ./venv
