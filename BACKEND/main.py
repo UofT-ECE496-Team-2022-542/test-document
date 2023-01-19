@@ -10,7 +10,20 @@ import logger
 import datetime
 import os
 
-ML_API_url = 'http://127.0.0.1:8000/predict/'
+##############################
+### IMAGE CLASSIFIER SETUP ###
+from image_classifier import ImageClassifier, forward_pass
+import torch
+from PIL import Image
+
+global model
+model = ImageClassifier()                         
+model.load_state_dict(torch.load('ResNet_Models/epoch_'+str(4)+'.pth', map_location=torch.device('cpu')))
+model.eval()
+
+#ML_API_url = 'http://127.0.0.1:8000/predict/'
+
+##############################
 
 #from exif import Image
 
@@ -49,8 +62,10 @@ if __name__ == "__main__":
         
         # 2. Encode image into byte string (converted using blob)
         # 3. Request ML API for prediction
-        response = requests.post(ML_API_url, data=json.dumps({"image": encoded_img}), headers = {"content-type": "application/json"})
-        r = response.text
+        ## response = requests.post(ML_API_url, data=json.dumps({"image": encoded_img}), headers = {"content-type": "application/json"})
+        ## r = response.text
+        r = forward_pass(model=model, image=Image.open(image_path))
+        
         #### TESTING BLOCK START ####
         expected_r = 'ERROR(BAD FILENAME)'
         try:
