@@ -9,6 +9,7 @@ Examples:
 2) > py -m venv --without-pip ./venv
 
 3) > venv\Scripts\activate
+   For mac: $ .venv/bin/activate
 
 4) > py -m ensurepip 
 
